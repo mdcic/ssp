@@ -1,0 +1,66 @@
+%define pyver %nil
+%define __python /usr/bin/python
+%define python_sitearch %(%{__python} -c 'from distutils import sysconfig; print sysconfig.get_python_lib(1)')
+
+Summary:  System Service Processor communication library
+Name:     ssp
+Version:  @VERSION@
+Release:  1%{?dist}
+License:  GPLv3+
+Group:    Applications/System
+
+Requires:       pywbem, python-paramiko, python-IPy
+Requires:       python%pyver
+BuildRequires:  pytest, @COMMON_UNITTEST_REQUIRES@
+BuildRequires:  make, python%pyver, python%pyver-setuptools
+Provides:       %name = %version-%release
+
+URL:        https://github.com/mdcic/ssp
+BuildRoot:  %_tmppath/%name-%version-root
+BuildArch:  noarch
+
+Source0: ssp-%version.tar.gz
+
+%description
+@DESCRIPTION@
+
+%package tools
+Summary: System Service Processor remote control tools
+Group: Applications/System
+Requires: %name
+Provides: %name-tools = %version-%release
+
+%description tools
+This package contains command-line tools to manage System
+Service Processors remotely. It uses SSP library.
+
+@DESCRIPTION@
+
+%prep
+%setup -n %name -q
+
+%build
+make
+%__python setup.py build
+
+%install
+[ %buildroot = "/" ] || rm -rf %buildroot
+make DESTDIR=%buildroot install
+
+%__python setup.py install \
+	--skip-build \
+	--root="%buildroot" \
+	--prefix="%_prefix" \
+	--install-lib="%python_sitearch"
+
+find %buildroot/ -name '*.egg-info' -exec rm -rf -- '{}' '+'
+
+
+%files
+%_datadir/c2/c2-ac
+%python_sitearch/ac/api
+%_sysconfdir/rc.d/init.d/*
+
+%files tools
+%_bindir/*
+

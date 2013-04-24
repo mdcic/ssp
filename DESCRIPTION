@@ -1,0 +1,9 @@
+System Service Processor communication library is a module for python that
+implements a set of operation with common system's service processors. It
+can be used in various areas from HA clustering (fencing agents) to HPC
+and datacenter management systems. E.g. where there is a need to control
+computer systems remotely. There are four major functions:
+ -discovery SP on the network,
+ -probbing for SP type,
+ -collecting vital SP and system(s) data,
+ -issuing commands to specific SP.

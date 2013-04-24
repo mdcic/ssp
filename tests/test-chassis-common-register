@@ -1,0 +1,29 @@
+#!/usr/bin/python
+import sys
+sys.path..insert(0,"/home/yurix/eucalyptus/common")
+import c2.hw.chassis.identify
+from c2.hw.chassis.service_processor import ServiceProcessor
+import c2.hw.chassis.operations
+import c2.config
+import c2.mongodb
+from c2.billing import constants as b_constants
+### init
+
+c2.config.init("hw-test5")
+
+username = 'root'
+password = 'calvin'
+hostname = '172.25.6.122'
+
+if c2.hw.chassis.operations.chassises_list(host=hostname):
+	print u"Chassis with host {0} already registered".format(hostname)
+else: 
+	print c2.hw.chassis.identify.suggest_sptype(hostname)
+	c=ServiceProcessor(host=hostname)
+	if c.guess_type_and_creds():
+		if c.updatevpd():
+			vpd=c.getVPD()
+
+c2.hw.chassis.operations.chassis_register(host=vpd['sp']['ip'], type=vpd['sp']['type'], user=vpd['sp']['type'], password=vpd['sp']['type'], secret=None, online=vpd['sp']['type'])
+c2.hw.chassis.operations.chassises_list()
+

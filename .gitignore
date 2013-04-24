@@ -1,0 +1,4 @@
+*.pyc
+build/
+dist/
+ssp.egg-info/
