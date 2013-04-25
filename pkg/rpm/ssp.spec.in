@@ -31,6 +31,7 @@ Summary: System Service Processor communication library
 Group: Applications/System
 Requires: pywbem, python-paramiko, python-IPy
 Requires: python%pyver
+Requires: openslp ipmiutil OpenIPMI
 BuildRequires:  make, python%pyver
 BuildRequires:  python%pyver-setuptools, python%pyver-sphinx, pytest
 Provides: %lib = %version-%release

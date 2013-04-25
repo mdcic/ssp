@@ -3,8 +3,7 @@ import os
 import sys
 import select
 import traceback
-sys.path.insert(0,"/home/yurix/eucalyptus/common")
-from c2.hw.chassis.scanner import Scanner
+from ssp.scanner import Scanner
 
 c=Scanner()
 targets=c.scan()
@@ -13,4 +12,3 @@ print str(targets)
 
 for t in targets.keys():
     print "{0:39} {1}".format(t, targets[t]['proto'])
-
