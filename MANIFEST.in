@@ -1,5 +1,3 @@
-recursive-include ssp/chassis *.py
-recursive-include ssp/remote *.py
 include DESCRIPTION LICENSE README.md ChangeLog
 recursive-include docs *
 recursive-include tests *

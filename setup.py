@@ -23,9 +23,14 @@ setup(name='ssp',
       ],
       author='Yury Konovalov',
       author_email='YKonovalov@gmail.com',
-      url='https://github.com/YKonovalov/ssp',
+      url='https://github.com/mdcic/ssp',
       license='GPLv3+',
-      packages=['ssp'],
+      packages=[
+          'ssp', 'ssp.remote', 'ssp.chassis',
+          'ssp.chassis.common', 'ssp.chassis.dell',
+          'ssp.chassis.ibm', 'ssp.chassis.wbem',
+          'ssp.chassis.ipmi'
+      ],
       scripts=['tools/ssp-chassis-scanner'],
       include_package_data=True,
       install_requires=[
